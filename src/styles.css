@@ -1,0 +1,96 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+  margin: 0;
+  background-color: #0b0f1a;
+  color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 10px;
+}
+.main-footer {
+  position: relative;
+  margin-top: 4rem;
+  padding: 2.5rem 2rem;
+  background: linear-gradient(135deg, #020617, #0f172a);
+  border-top: 1px solid rgba(56, 189, 248, 0.18);
+  overflow: hidden;
+}
+
+.footer-glow {
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  background: rgba(56, 189, 248, 0.15);
+  filter: blur(80px);
+  top: -120px;
+  right: 10%;
+}
+
+.footer-content {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+  color: #cbd5e1;
+}
+
+.footer-brand h2 {
+  color: #38bdf8;
+  margin: 0 0 0.5rem;
+}
+
+.footer-brand p,
+.footer-info p {
+  margin: 0.25rem 0;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  color: #e2e8f0;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.footer-links a:hover {
+  color: #38bdf8;
+}
+
+.footer-info {
+  text-align: right;
+}
+
+@media (max-width: 700px) {
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-info {
+    text-align: center;
+  }
+
+  .footer-links {
+    justify-content: center;
+  }
+}

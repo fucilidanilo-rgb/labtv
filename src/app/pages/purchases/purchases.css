@@ -1,0 +1,235 @@
+.purchases-page {
+  min-height: 100vh;
+  padding: 2rem;
+  background:
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.12), transparent 30%),
+    radial-gradient(circle at top right, rgba(168, 85, 247, 0.12), transparent 30%),
+    linear-gradient(135deg, #020617, #0f172a, #111827);
+  color: white;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Mascotte LABTV */
+.labtv-mascot {
+  position: relative;
+  width: fit-content;
+  margin: 0 auto 2rem auto;
+  animation: mascotEntrance 1.2s ease;
+}
+
+.mascot-face {
+  width: 90px;
+  height: 90px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #0ea5e9, #2563eb);
+  position: relative;
+  margin: 0 auto;
+  box-shadow: 0 15px 35px rgba(37, 99, 235, 0.35);
+  transform: rotate(-4deg);
+}
+
+.eye {
+  position: absolute;
+  width: 12px;
+  height: 18px;
+  background: white;
+  border-radius: 50%;
+  top: 28px;
+}
+
+.eye.left {
+  left: 24px;
+}
+
+.eye.right {
+  right: 24px;
+}
+
+.mouth {
+  position: absolute;
+  width: 30px;
+  height: 12px;
+  border-bottom: 4px solid white;
+  border-radius: 0 0 30px 30px;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+}
+
+.speech-bubble {
+  margin-top: 12px;
+  background: rgba(15, 23, 42, 0.92);
+  color: #e2e8f0;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  padding: 0.8rem 1rem;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  animation: bubbleFloat 2.5s ease-in-out infinite;
+}
+
+.purchases-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.purchases-header h1 {
+  margin: 0;
+  font-size: 2.4rem;
+  color: #38bdf8;
+  text-shadow: 0 0 18px rgba(56, 189, 248, 0.25);
+}
+
+.purchases-header p {
+  margin-top: 0.6rem;
+  color: #cbd5e1;
+  font-size: 1rem;
+}
+
+.loading-box,
+.empty-state {
+  text-align: center;
+  margin-top: 3rem;
+  color: #cbd5e1;
+}
+
+.empty-icon {
+  font-size: 3rem;
+  margin-bottom: 0.6rem;
+}
+
+.spinner {
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 1rem auto;
+  border: 4px solid rgba(255, 255, 255, 0.15);
+  border-top: 4px solid #38bdf8;
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+
+.purchases-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 1.5rem;
+}
+
+.purchase-card {
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(56, 189, 248, 0.14);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  animation: fadeUp 0.5s ease;
+}
+
+.purchase-card:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 20px 40px rgba(14, 165, 233, 0.12);
+}
+
+.purchase-image-wrapper {
+  width: 100%;
+  height: 330px;
+  overflow: hidden;
+  background: #0b1220;
+}
+
+.purchase-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.purchase-card:hover .purchase-image {
+  transform: scale(1.04);
+}
+
+.purchase-content {
+  padding: 1rem;
+}
+
+.purchase-content h3 {
+  margin: 0 0 0.65rem 0;
+  font-size: 1.05rem;
+  color: white;
+  min-height: 48px;
+}
+
+.purchase-date {
+  color: #cbd5e1;
+  font-size: 0.92rem;
+  margin-bottom: 1rem;
+}
+
+.return-button {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f59e0b, #ea580c);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.return-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(234, 88, 12, 0.3);
+}
+
+@keyframes mascotEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(-25px) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes bubbleFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 600px) {
+  .purchases-page {
+    padding: 1.2rem;
+  }
+
+  .purchases-header h1 {
+    font-size: 2rem;
+  }
+
+  .purchase-image-wrapper {
+    height: 280px;
+  }
+}

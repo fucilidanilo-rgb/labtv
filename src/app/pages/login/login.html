@@ -1,0 +1,22 @@
+<div class="login-wrapper">
+  <div class="login-card">
+    <h2>Bentornato! 👋</h2>
+    <p>Accedi per gestire i tuoi acquisti</p>
+    
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" name="email" [(ngModel)]="loginData.email" placeholder="latua@email.com" required>
+      </div>
+
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" name="password" [(ngModel)]="loginData.password" placeholder="••••••••" required>
+      </div>
+
+      <button type="submit" class="btn-login">Accedi</button>
+    </form>
+    
+   
+  </div>
+</div>

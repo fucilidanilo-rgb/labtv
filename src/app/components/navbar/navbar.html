@@ -1,0 +1,38 @@
+<nav class="navbar">
+  <div class="navbar-left">
+    <a routerLink="/" class="brand">LABTV</a>
+
+    <div class="nav-links">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        Home
+      </a>
+
+      <a *ngIf="!authService.isLoggedIn()" routerLink="/login" routerLinkActive="active">
+        Login
+      </a>
+
+      <a *ngIf="!authService.isLoggedIn()" routerLink="/register" routerLinkActive="active">
+        Registrazione
+      </a>
+
+      <a *ngIf="authService.isLoggedIn()" routerLink="/purchases" routerLinkActive="active">
+        Acquisti
+      </a>
+
+      <a routerLink="/contacts" routerLinkActive="active">
+        Contatti
+      </a>
+    </div>
+  </div>
+
+  <!-- DESTRA -->
+  <div class="navbar-right" *ngIf="authService.isLoggedIn()">
+    <span class="user-name">
+      👤 {{ authService.getUser()?.name }}
+    </span>
+
+    <button class="logout-btn" (click)="logout()">
+      Logout
+    </button>
+  </div>
+</nav>

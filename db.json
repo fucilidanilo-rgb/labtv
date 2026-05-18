@@ -1,0 +1,98 @@
+{
+  "users": [
+    {
+      "name": "Lab_prov",
+      "email": "lar@al.it",
+      "password": "345698",
+      "id": 1
+    },
+    {
+      "name": "Franco",
+      "email": "franco@mid.it",
+      "password": "12569",
+      "id": 2
+    },
+    {
+      "name": "Luara",
+      "email": "luara@ali.it",
+      "password": "35458",
+      "id": 3
+    },
+    {
+      "name": "Mirko",
+      "email": "mirko@sl.id",
+      "password": "25689",
+      "id": 4
+    },
+    {
+      "name": "Roberta",
+      "email": "rambla@hotmail.com",
+      "password": "giuseppina",
+      "id": 5
+    },
+    {
+      "name": "Francesco",
+      "email": "francesco@li.it",
+      "password": "56289",
+      "id": 6
+    },
+    {
+      "name": "Franco",
+      "email": "franc@hot.t",
+      "password": "45989",
+      "id": 7
+    },
+    {
+      "name": "elisa",
+      "email": "elisa@lab.it",
+      "password": "23456",
+      "id": 8
+    },
+    {
+      "name": "marcello",
+      "email": "m.rob@ali.it",
+      "password": "23456",
+      "id": 9
+    },
+    {
+      "name": "Mario",
+      "email": "mario@lae.it",
+      "password": "zjhdhdhzhdkz",
+      "id": 10
+    }
+  ],
+  "films-acquistati": [
+    {
+      "userId": 4,
+      "movieId": 1327819,
+      "title": "Hoppers",
+      "poster": "/xjtWQ2CL1mpmMNwuU5HeS4Iuwuu.jpg",
+      "purchaseDate": "2026-04-21T14:31:42.486Z",
+      "id": 1
+    },
+    {
+      "userId": 3,
+      "movieId": 1523145,
+      "title": "Your Heart Will Be Broken",
+      "poster": "/7wIBfBl2gejt6xHxNSK0reVIm7E.jpg",
+      "purchaseDate": "2026-04-21T14:33:34.870Z",
+      "id": 2
+    },
+    {
+      "userId": 9,
+      "movieId": 1292695,
+      "title": "They Will Kill You",
+      "poster": "/6oI4oQKTWMVUlr8Ivqydp28Ruu6.jpg",
+      "purchaseDate": "2026-05-03T15:23:02.472Z",
+      "id": 3
+    },
+    {
+      "userId": 10,
+      "movieId": 687163,
+      "title": "Project Hail Mary",
+      "poster": "/yihdXomYb5kTeSivtFndMy5iDmf.jpg",
+      "purchaseDate": "2026-05-17T20:55:52.519Z",
+      "id": 4
+    }
+  ]
+}
