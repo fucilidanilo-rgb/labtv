@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # LABTV
 
 LABTV è un’applicazione web sviluppata con Angular per la consultazione e la gestione di film.
@@ -29,7 +28,3 @@ Installare le dipendenze:
 
 ```bash
 npm install
-=======
-# labtv
-Angular &amp; TMDB API piattaforma streaming dinamica 
->>>>>>> 5321ed71abee492b5192616bf4b1fc028bd6a38f
