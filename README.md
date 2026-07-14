@@ -28,3 +28,26 @@ Installare le dipendenze:
 
 ```bash
 npm install
+```
+
+Avviare Angular:
+
+```bash
+ng serve
+```
+
+Avviare JSON Server in un secondo terminale:
+
+```bash
+json-server --watch db.json --port 3000
+```
+
+Aprire il progetto nel browser:
+
+```text
+http://localhost:4200
+```
+
+## Autore
+
+Danilo Fucili
