@@ -1,0 +1,90 @@
+<div class="detail-page">
+  <div *ngIf="loading()" class="loading-text">
+    Caricamento dettaglio...
+  </div>
+
+  <div *ngIf="movie()" class="detail-container">
+    <!-- SINISTRA: POSTER -->
+    <div class="detail-left">
+      <div class="poster-wrapper" (click)="apriTrailer()">
+        <img
+          *ngIf="movie()?.poster_path"
+          [src]="imageBaseUrl + movie()?.poster_path"
+          [alt]="movie()?.title"
+        />
+
+        <div class="play-overlay">
+          <div class="play-button">▶</div>
+          <span>Guarda trailer</span>
+        </div>
+      </div>
+
+      <p class="click-hint">Clicca sul poster per vedere il trailer 🎬</p>
+    </div>
+
+    <!-- CENTRO: INFO -->
+    <div class="detail-info">
+      <h1>{{ movie()?.title }}</h1>
+
+      <div class="side-image-slide" *ngIf="movie()?.backdrop_path">
+  <img
+    [src]="imageBaseUrl + movie()?.backdrop_path"
+    [alt]="movie()?.title"
+  />
+</div>
+
+      <p class="detail-year">
+        {{ movie()?.release_date ? (movie()?.release_date | date:'yyyy') : 'N/D' }}
+      </p>
+
+      <p class="detail-overview">
+        {{ movie()?.overview || 'Descrizione non disponibile.' }}
+      </p>
+
+      <p class="detail-genres" *ngIf="movie()?.genres?.length">
+        <strong>Generi:</strong>
+        <span *ngFor="let genre of movie()?.genres; let last = last">
+          {{ genre.name }}<span *ngIf="!last">, </span>
+        </span>
+      </p>
+
+      <a routerLink="/" class="back-button">Torna al catalogo</a>
+    </div>
+
+    <!-- DESTRA: CARD INFO -->
+    <aside class="detail-side">
+      <div class="side-card">
+        <h3>Info Film</h3>
+
+        <div class="rating-big" *ngIf="movie()?.vote_average">
+          ⭐ {{ movie()?.vote_average | number:'1.1-1' }}/10
+        </div>
+
+        <div class="meta-list">
+          <p>📅 {{ movie()?.release_date ? (movie()?.release_date | date:'longDate') : 'N/D' }}</p>
+          <p>🌍 Lingua: {{ movie()?.original_language | uppercase }}</p>
+          <p *ngIf="movie()?.runtime">⏱ Durata: {{ movie()?.runtime }} min</p>
+          <p *ngIf="movie()?.status">🎞 Stato: {{ movie()?.status }}</p>
+        </div>
+
+        <button class="side-trailer" (click)="apriTrailer()">
+          ▶ Guarda Trailer
+        </button>
+      </div>
+    </aside>
+  </div>
+
+  <!-- POPUP TRAILER -->
+  <div class="trailer-modal" *ngIf="showTrailer && trailerUrl" (click)="chiudiTrailer()">
+    <div class="trailer-content" (click)="$event.stopPropagation()">
+      <button class="close-btn" (click)="chiudiTrailer()">✕</button>
+
+      <iframe
+        [src]="trailerUrl"
+        frameborder="0"
+        allow="autoplay; encrypted-media; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+</div>

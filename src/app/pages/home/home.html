@@ -1,0 +1,74 @@
+<div class="home-container">
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Benvenuto su LABTV</h1>
+      <p>Scopri i migliori film del momento</p>
+    </div>
+  </section>
+
+  <section class="search-section">
+    <input
+      type="text"
+      [(ngModel)]="searchText"
+      (keyup.enter)="onSearch()"
+      placeholder="Cerca un film..."
+      class="search-input"
+    />
+
+    <button type="button" class="search-button" (click)="onSearch()">
+      Cerca
+    </button>
+  </section>
+
+  <div *ngIf="loading" class="loading-text">
+    Caricamento...
+  </div>
+
+  <section class="movies-grid">
+    <div class="movie-card" *ngFor="let movie of movies">
+      <a [routerLink]="['/movie', movie.id]" class="movie-link">
+        <div class="movie-image-wrapper">
+          <img
+            *ngIf="movie.poster_path"
+            [src]="imageBaseUrl + movie.poster_path"
+            [alt]="movie.title"
+            class="movie-image"
+          />
+        </div>
+
+        <div class="movie-overlay">
+          <div class="movie-info">
+            <h3>{{ movie.title }}</h3>
+            <p>{{ movie.release_date ? (movie.release_date | date:'yyyy') : 'N/D' }}</p>
+            <span class="detail-button">Dettaglio</span>
+          </div>
+        </div>
+      </a>
+
+      <div class="movie-actions">
+        <ng-container *ngIf="authService.isLoggedIn(); else loginMessage">
+          <button
+            *ngIf="!isPurchased(movie.id); else returnButton"
+            class="buy-button"
+            (click)="compralo(movie)"
+          >
+            🛒 Acquista
+          </button>
+
+          <ng-template #returnButton>
+            <button
+              class="return-button"
+              (click)="restituisciDaHome(movie.id)"
+            >
+              ↩️ Restituisci Film
+            </button>
+          </ng-template>
+        </ng-container>
+
+        <ng-template #loginMessage>
+          <p class="login-warning">Accedi per acquistare questo film</p>
+        </ng-template>
+      </div>
+    </div>
+  </section>
+</div>
