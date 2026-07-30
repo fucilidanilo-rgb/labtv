@@ -35,7 +35,9 @@
 .poster-wrapper img {
   width: 100%;
   display: block;
-  transition: transform 0.3s ease, filter 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    filter 0.3s ease;
 }
 
 .poster-wrapper:hover img {
@@ -115,9 +117,152 @@
   margin-bottom: 1rem;
 }
 
+/* IMMAGINE LATERALE DEL FILM */
+.side-image-slide {
+  width: 100%;
+  margin: 1rem 0 1.4rem;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
+  animation: slideFromRight 0.7s ease forwards;
+}
+
+.side-image-slide img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+/* PULSANTE CAST */
+.cast-button {
+  display: inline-block;
+  margin-top: 0.8rem;
+  padding: 0.85rem 1.2rem;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #0ea5e9, #2563eb);
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+
+.cast-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(37, 99, 235, 0.35);
+  filter: brightness(1.08);
+}
+
+.cast-button:active {
+  transform: translateY(0);
+}
+
+/* SEZIONE CAST */
+.cast-section {
+  margin-top: 1.5rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid rgba(56, 189, 248, 0.16);
+  animation: castFade 0.35s ease;
+}
+
+.cast-section h2 {
+  margin: 0 0 1rem;
+  color: #38bdf8;
+  font-size: 1.5rem;
+}
+
+.cast-loading,
+.no-cast {
+  color: #cbd5e1;
+  font-size: 0.95rem;
+}
+
+/* GRIGLIA CAST */
+.cast-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+/* SCHEDA ATTORE */
+.cast-card {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.8rem;
+  border-radius: 15px;
+  background: rgba(2, 6, 23, 0.58);
+  border: 1px solid rgba(56, 189, 248, 0.12);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.cast-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(56, 189, 248, 0.4);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.28);
+}
+
+/* FOTO ATTORE */
+.cast-image-wrapper {
+  width: 72px;
+  height: 96px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #111827;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.cast-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.cast-placeholder {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  background: #111827;
+  color: #64748b;
+  font-size: 2rem;
+}
+
+/* TESTI ATTORE */
+.cast-info {
+  min-width: 0;
+}
+
+.cast-info h3 {
+  margin: 0 0 0.35rem;
+  color: white;
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+.cast-info p {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 0.88rem;
+  line-height: 1.35;
+}
+
+/* PULSANTE TORNA AL CATALOGO */
 .back-button {
   display: inline-block;
-  margin-top: 1rem;
+  margin-top: 1.2rem;
+  margin-left: 0.5rem;
   padding: 0.85rem 1.1rem;
   border-radius: 12px;
   background: linear-gradient(135deg, #0ea5e9, #2563eb);
@@ -230,7 +375,32 @@
   background: #ef4444;
 }
 
-/* RESPONSIVE */
+/* ANIMAZIONI */
+@keyframes slideFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(90px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes castFade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* RESPONSIVE TABLET */
 @media (max-width: 1050px) {
   .detail-container {
     grid-template-columns: 280px 1fr;
@@ -242,6 +412,7 @@
   }
 }
 
+/* RESPONSIVE MOBILE */
 @media (max-width: 700px) {
   .detail-page {
     padding: 1.2rem;
@@ -260,31 +431,22 @@
     font-size: 2rem;
   }
 
-  .side-image-slide {
-  width: 100%;
-  margin: 1rem 0 1.4rem;
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
-  animation: slideFromRight 0.7s ease forwards;
-}
-
-.side-image-slide img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  display: block;
-}
-
-@keyframes slideFromRight {
-  from {
-    opacity: 0;
-    transform: translateX(90px);
+  .side-image-slide img {
+    height: 180px;
   }
 
-  to {
-    opacity: 1;
-    transform: translateX(0);
+  .cast-grid {
+    grid-template-columns: 1fr;
   }
-}
+
+  .cast-button,
+  .back-button {
+    width: 100%;
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .back-button {
+    box-sizing: border-box;
+  }
 }

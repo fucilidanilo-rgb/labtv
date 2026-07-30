@@ -14,36 +14,53 @@ export class MoviesService {
 
   getMovies(): Observable<Movie[]> {
     return this.http
-      .get<any>(`${environment.tmdbBaseUrl}/discover/movie?api_key=${environment.tmdbApiKey}`)
+      .get<any>(
+        `${environment.tmdbBaseUrl}/discover/movie?api_key=${environment.tmdbApiKey}`
+      )
       .pipe(map((res) => res.results));
   }
 
   searchMovies(query: string): Observable<Movie[]> {
     return this.http
       .get<any>(
-        `${environment.tmdbBaseUrl}/search/movie?api_key=${environment.tmdbApiKey}&query=${encodeURIComponent(query)}`
+        `${environment.tmdbBaseUrl}/search/movie` +
+        `?api_key=${environment.tmdbApiKey}` +
+        `&query=${encodeURIComponent(query)}`
       )
       .pipe(map((res) => res.results));
   }
 
   getMovieDetails(id: number): Observable<any> {
     return this.http.get<any>(
-      `${environment.tmdbBaseUrl}/movie/${id}?api_key=${environment.tmdbApiKey}&language=en-US`
+      `${environment.tmdbBaseUrl}/movie/${id}` +
+      `?api_key=${environment.tmdbApiKey}` +
+      `&language=it-IT`
     );
   }
 
-
   getMovieVideos(id: number): Observable<any> {
-  return this.http.get<any>(
-    `${environment.tmdbBaseUrl}/movie/${id}/videos?api_key=${environment.tmdbApiKey}`
-  );
-}
+    return this.http.get<any>(
+      `${environment.tmdbBaseUrl}/movie/${id}/videos` +
+      `?api_key=${environment.tmdbApiKey}` +
+      `&language=it-IT`
+    );
+  }
+
+  getMovieCredits(id: number): Observable<any> {
+    return this.http.get<any>(
+      `${environment.tmdbBaseUrl}/movie/${id}/credits` +
+      `?api_key=${environment.tmdbApiKey}` +
+      `&language=it-IT`
+    );
+  }
 
   getPurchasedMovies(): Observable<any[]> {
     const user = this.authService.getUser();
 
     if (!user || !user.id) {
-      return this.http.get<any[]>(`${environment.localUrl}/films-acquistati?userId=0`);
+      return this.http.get<any[]>(
+        `${environment.localUrl}/films-acquistati?userId=0`
+      );
     }
 
     return this.http.get<any[]>(
@@ -62,12 +79,15 @@ export class MoviesService {
       purchaseDate: new Date().toISOString()
     };
 
-    return this.http.post(`${environment.localUrl}/films-acquistati`, purchase);
+    return this.http.post(
+      `${environment.localUrl}/films-acquistati`,
+      purchase
+    );
   }
 
   returnMovie(purchaseId: number): Observable<any> {
-    return this.http.delete(`${environment.localUrl}/films-acquistati/${purchaseId}`);
+    return this.http.delete(
+      `${environment.localUrl}/films-acquistati/${purchaseId}`
+    );
   }
-
-  
 }

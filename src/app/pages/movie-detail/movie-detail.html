@@ -4,6 +4,7 @@
   </div>
 
   <div *ngIf="movie()" class="detail-container">
+
     <!-- SINISTRA: POSTER -->
     <div class="detail-left">
       <div class="poster-wrapper" (click)="apriTrailer()">
@@ -19,36 +20,138 @@
         </div>
       </div>
 
-      <p class="click-hint">Clicca sul poster per vedere il trailer 🎬</p>
+      <p class="click-hint">
+        Clicca sul poster per vedere il trailer 🎬
+      </p>
     </div>
 
     <!-- CENTRO: INFO -->
     <div class="detail-info">
       <h1>{{ movie()?.title }}</h1>
 
-      <div class="side-image-slide" *ngIf="movie()?.backdrop_path">
-  <img
-    [src]="imageBaseUrl + movie()?.backdrop_path"
-    [alt]="movie()?.title"
-  />
-</div>
+      <div
+        class="side-image-slide"
+        *ngIf="movie()?.backdrop_path"
+      >
+        <img
+          [src]="imageBaseUrl + movie()?.backdrop_path"
+          [alt]="movie()?.title"
+        />
+      </div>
 
       <p class="detail-year">
-        {{ movie()?.release_date ? (movie()?.release_date | date:'yyyy') : 'N/D' }}
+        {{
+          movie()?.release_date
+            ? (movie()?.release_date | date:'yyyy')
+            : 'N/D'
+        }}
       </p>
 
       <p class="detail-overview">
-        {{ movie()?.overview || 'Descrizione non disponibile.' }}
+        {{
+          movie()?.overview ||
+          'Descrizione non disponibile.'
+        }}
       </p>
 
-      <p class="detail-genres" *ngIf="movie()?.genres?.length">
+      <p
+        class="detail-genres"
+        *ngIf="movie()?.genres?.length"
+      >
         <strong>Generi:</strong>
-        <span *ngFor="let genre of movie()?.genres; let last = last">
-          {{ genre.name }}<span *ngIf="!last">, </span>
+
+        <span
+          *ngFor="
+            let genre of movie()?.genres;
+            let last = last
+          "
+        >
+          {{ genre.name }}
+          <span *ngIf="!last">, </span>
         </span>
       </p>
 
-      <a routerLink="/" class="back-button">Torna al catalogo</a>
+      <!-- PULSANTE CAST -->
+      <button
+        type="button"
+        class="cast-button"
+        (click)="toggleCast()"
+      >
+        {{ showCast ? 'Nascondi Cast' : 'Mostra Cast' }}
+      </button>
+
+      <!-- SEZIONE CAST -->
+      <div
+        class="cast-section"
+        *ngIf="showCast"
+      >
+        <h2>Cast principale</h2>
+
+        <p
+          *ngIf="loadingCast"
+          class="cast-loading"
+        >
+          Caricamento cast...
+        </p>
+
+        <div
+          class="cast-grid"
+          *ngIf="!loadingCast && cast.length > 0"
+        >
+          <article
+            class="cast-card"
+            *ngFor="let actor of cast"
+          >
+            <div class="cast-image-wrapper">
+
+              <img
+                *ngIf="
+                  actor.profile_path;
+                  else noActorImage
+                "
+                [src]="imageBaseUrl + actor.profile_path"
+                [alt]="actor.name"
+                class="cast-image"
+              />
+
+              <ng-template #noActorImage>
+                <div class="cast-placeholder">
+                  👤
+                </div>
+              </ng-template>
+
+            </div>
+
+            <div class="cast-info">
+              <h3>{{ actor.name }}</h3>
+
+              <p>
+                {{
+                  actor.character ||
+                  'Ruolo non disponibile'
+                }}
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <p
+          *ngIf="
+            !loadingCast &&
+            cast.length === 0
+          "
+          class="no-cast"
+        >
+          Cast non disponibile per questo film.
+        </p>
+      </div>
+
+      <a
+        routerLink="/"
+        class="back-button"
+      >
+        Torna al catalogo
+      </a>
     </div>
 
     <!-- DESTRA: CARD INFO -->
@@ -56,34 +159,85 @@
       <div class="side-card">
         <h3>Info Film</h3>
 
-        <div class="rating-big" *ngIf="movie()?.vote_average">
-          ⭐ {{ movie()?.vote_average | number:'1.1-1' }}/10
+        <div
+          class="rating-big"
+          *ngIf="movie()?.vote_average"
+        >
+          ⭐
+          {{
+            movie()?.vote_average
+              | number:'1.1-1'
+          }}/10
         </div>
 
         <div class="meta-list">
-          <p>📅 {{ movie()?.release_date ? (movie()?.release_date | date:'longDate') : 'N/D' }}</p>
-          <p>🌍 Lingua: {{ movie()?.original_language | uppercase }}</p>
-          <p *ngIf="movie()?.runtime">⏱ Durata: {{ movie()?.runtime }} min</p>
-          <p *ngIf="movie()?.status">🎞 Stato: {{ movie()?.status }}</p>
+          <p>
+            📅
+            {{
+              movie()?.release_date
+                ? (
+                    movie()?.release_date
+                    | date:'longDate'
+                  )
+                : 'N/D'
+            }}
+          </p>
+
+          <p>
+            🌍 Lingua:
+            {{
+              movie()?.original_language
+                | uppercase
+            }}
+          </p>
+
+          <p *ngIf="movie()?.runtime">
+            ⏱ Durata:
+            {{ movie()?.runtime }} min
+          </p>
+
+          <p *ngIf="movie()?.status">
+            🎞 Stato:
+            {{ movie()?.status }}
+          </p>
         </div>
 
-        <button class="side-trailer" (click)="apriTrailer()">
+        <button
+          type="button"
+          class="side-trailer"
+          (click)="apriTrailer()"
+        >
           ▶ Guarda Trailer
         </button>
       </div>
     </aside>
+
   </div>
 
   <!-- POPUP TRAILER -->
-  <div class="trailer-modal" *ngIf="showTrailer && trailerUrl" (click)="chiudiTrailer()">
-    <div class="trailer-content" (click)="$event.stopPropagation()">
-      <button class="close-btn" (click)="chiudiTrailer()">✕</button>
+  <div
+    class="trailer-modal"
+    *ngIf="showTrailer && trailerUrl"
+    (click)="chiudiTrailer()"
+  >
+    <div
+      class="trailer-content"
+      (click)="$event.stopPropagation()"
+    >
+      <button
+        type="button"
+        class="close-btn"
+        (click)="chiudiTrailer()"
+      >
+        ✕
+      </button>
 
       <iframe
         [src]="trailerUrl"
         frameborder="0"
         allow="autoplay; encrypted-media; picture-in-picture"
-        allowfullscreen>
+        allowfullscreen
+      >
       </iframe>
     </div>
   </div>

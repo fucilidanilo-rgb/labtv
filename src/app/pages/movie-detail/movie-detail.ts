@@ -17,14 +17,22 @@ export class MovieDetail implements OnInit {
   private moviesService = inject(MoviesService);
   private sanitizer = inject(DomSanitizer);
 
+  // Dati del film
   movie = signal<any | null>(null);
   loading = signal(false);
 
+  // URL immagini TMDB
   imageBaseUrl = environment.imageBaseUrl;
 
+  // Trailer
   trailerKey = '';
   trailerUrl: SafeResourceUrl | null = null;
   showTrailer = false;
+
+  // Cast
+  cast: any[] = [];
+  showCast = false;
+  loadingCast = false;
 
   ngOnInit(): void {
     const idParam = this.route.snapshot.paramMap.get('id');
@@ -37,6 +45,7 @@ export class MovieDetail implements OnInit {
 
     this.loadMovie(id);
     this.loadTrailer(id);
+    this.loadCast(id);
   }
 
   loadMovie(id: number): void {
@@ -58,9 +67,20 @@ export class MovieDetail implements OnInit {
     this.moviesService.getMovieVideos(id).subscribe({
       next: (res) => {
         const video =
-          res.results.find((v: any) => v.site === 'YouTube' && v.type === 'Trailer') ||
-          res.results.find((v: any) => v.site === 'YouTube' && v.type === 'Teaser') ||
-          res.results.find((v: any) => v.site === 'YouTube');
+          res.results.find(
+            (v: any) =>
+              v.site === 'YouTube' &&
+              v.type === 'Trailer'
+          ) ||
+          res.results.find(
+            (v: any) =>
+              v.site === 'YouTube' &&
+              v.type === 'Teaser'
+          ) ||
+          res.results.find(
+            (v: any) =>
+              v.site === 'YouTube'
+          );
 
         if (video) {
           this.trailerKey = video.key;
@@ -75,6 +95,29 @@ export class MovieDetail implements OnInit {
     });
   }
 
+  loadCast(id: number): void {
+    this.loadingCast = true;
+
+    this.moviesService.getMovieCredits(id).subscribe({
+      next: (res) => {
+        this.cast = (res.cast || []).slice(0, 8);
+        this.loadingCast = false;
+
+        console.log('Cast principale:', this.cast);
+      },
+      error: (err) => {
+        console.error('Errore caricamento cast:', err);
+
+        this.cast = [];
+        this.loadingCast = false;
+      }
+    });
+  }
+
+  toggleCast(): void {
+    this.showCast = !this.showCast;
+  }
+
   setTrailerUrl(muted: boolean): void {
     const muteValue = muted ? 1 : 0;
 
@@ -86,7 +129,8 @@ export class MovieDetail implements OnInit {
       `&rel=0` +
       `&modestbranding=1`;
 
-    this.trailerUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+    this.trailerUrl =
+      this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
   apriTrailer(): void {
@@ -99,12 +143,8 @@ export class MovieDetail implements OnInit {
     this.showTrailer = true;
   }
 
-
-
   chiudiTrailer(): void {
     this.showTrailer = false;
     this.trailerUrl = null;
   }
-
- 
 }
