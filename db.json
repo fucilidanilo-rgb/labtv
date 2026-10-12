@@ -59,7 +59,6 @@
       "email": "mario@lae.it",
       "password": "zjhdhdhzhdkz",
       "id": 10
-
     },
     {
       "name": "Danilo",
@@ -78,8 +77,12 @@
       "email": "f.lio@alice.it",
       "password": "Danix83",
       "id": 13
-
-
+    },
+    {
+      "name": "Gennaro",
+      "email": "gennaro@il.it",
+      "password": "Gennaromauri83:",
+      "id": 14
     }
   ],
   "films-acquistati": [

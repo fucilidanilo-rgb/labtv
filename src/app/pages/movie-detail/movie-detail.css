@@ -1,3 +1,8 @@
+
+/* =========================================
+   LABTV - PAGINA DETTAGLIO FILM
+   ========================================= */
+
 .detail-page {
   min-height: 100vh;
   padding: 2rem;
@@ -11,20 +16,33 @@
   margin-top: 3rem;
 }
 
+/* LAYOUT PRINCIPALE */
+
 .detail-container {
   display: grid;
-  grid-template-columns: 300px minmax(320px, 1fr) 270px;
+  grid-template-columns: 300px minmax(0, 1fr) 270px;
   gap: 2rem;
   align-items: start;
 }
 
-/* POSTER */
+.detail-container > * {
+  min-width: 0;
+}
+
+/* =========================================
+   LOCANDINA SINISTRA
+   ========================================= */
+
 .detail-left {
+  width: 100%;
+  max-width: 300px;
   text-align: center;
 }
 
 .poster-wrapper {
   position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 3;
   cursor: pointer;
   border-radius: 18px;
   overflow: hidden;
@@ -34,7 +52,10 @@
 
 .poster-wrapper img {
   width: 100%;
+  height: 100%;
   display: block;
+  object-fit: cover;
+  object-position: center;
   transition:
     transform 0.3s ease,
     filter 0.3s ease;
@@ -44,6 +65,8 @@
   transform: scale(1.05);
   filter: brightness(0.55);
 }
+
+/* PLAY TRAILER */
 
 .play-overlay {
   position: absolute;
@@ -86,8 +109,12 @@
   font-size: 0.9rem;
 }
 
-/* INFO CENTRALE */
+/* =========================================
+   INFORMAZIONI CENTRALI
+   ========================================= */
+
 .detail-info {
+  min-width: 0;
   background: rgba(15, 23, 42, 0.82);
   border: 1px solid rgba(56, 189, 248, 0.14);
   border-radius: 20px;
@@ -99,6 +126,7 @@
   margin: 0 0 0.6rem;
   font-size: 2.3rem;
   color: #38bdf8;
+  overflow-wrap: anywhere;
 }
 
 .detail-year {
@@ -117,24 +145,34 @@
   margin-bottom: 1rem;
 }
 
-/* IMMAGINE LATERALE DEL FILM */
+/* =========================================
+   IMMAGINE ORIZZONTALE DEL FILM
+   ========================================= */
+
 .side-image-slide {
   width: 100%;
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
   margin: 1rem 0 1.4rem;
   border-radius: 18px;
   overflow: hidden;
+  background: #020617;
   box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
   animation: slideFromRight 0.7s ease forwards;
 }
 
 .side-image-slide img {
   width: 100%;
-  height: 220px;
-  object-fit: cover;
+  height: 100%;
   display: block;
+  object-fit: cover;
+  object-position: center;
 }
 
-/* PULSANTE CAST */
+/* =========================================
+   PULSANTE CAST
+   ========================================= */
+
 .cast-button {
   display: inline-block;
   margin-top: 0.8rem;
@@ -162,7 +200,10 @@
   transform: translateY(0);
 }
 
-/* SEZIONE CAST */
+/* =========================================
+   SEZIONE CAST
+   ========================================= */
+
 .cast-section {
   margin-top: 1.5rem;
   padding-top: 1.4rem;
@@ -183,6 +224,7 @@
 }
 
 /* GRIGLIA CAST */
+
 .cast-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -190,10 +232,12 @@
 }
 
 /* SCHEDA ATTORE */
+
 .cast-card {
   display: flex;
   align-items: center;
   gap: 0.9rem;
+  min-width: 0;
   padding: 0.8rem;
   border-radius: 15px;
   background: rgba(2, 6, 23, 0.58);
@@ -212,6 +256,7 @@
 }
 
 /* FOTO ATTORE */
+
 .cast-image-wrapper {
   width: 72px;
   height: 96px;
@@ -227,6 +272,7 @@
   height: 100%;
   display: block;
   object-fit: cover;
+  object-position: center top;
 }
 
 .cast-placeholder {
@@ -240,6 +286,7 @@
 }
 
 /* TESTI ATTORE */
+
 .cast-info {
   min-width: 0;
 }
@@ -249,6 +296,7 @@
   color: white;
   font-size: 1rem;
   line-height: 1.25;
+  overflow-wrap: anywhere;
 }
 
 .cast-info p {
@@ -258,7 +306,10 @@
   line-height: 1.35;
 }
 
-/* PULSANTE TORNA AL CATALOGO */
+/* =========================================
+   PULSANTE TORNA AL CATALOGO
+   ========================================= */
+
 .back-button {
   display: inline-block;
   margin-top: 1.2rem;
@@ -277,8 +328,12 @@
   box-shadow: 0 12px 24px rgba(37, 99, 235, 0.3);
 }
 
-/* CARD DESTRA */
+/* =========================================
+   CARD DESTRA
+   ========================================= */
+
 .detail-side {
+  min-width: 0;
   position: sticky;
   top: 95px;
 }
@@ -327,7 +382,10 @@
   box-shadow: 0 12px 24px rgba(37, 99, 235, 0.35);
 }
 
-/* MODAL TRAILER */
+/* =========================================
+   MODAL TRAILER
+   ========================================= */
+
 .trailer-modal {
   position: fixed;
   inset: 0;
@@ -338,6 +396,7 @@
   justify-content: center;
   align-items: flex-start;
   padding: 5vh 1.5rem;
+  overflow-y: auto;
 }
 
 .trailer-content {
@@ -354,6 +413,7 @@
   width: 100%;
   height: 100%;
   display: block;
+  border: none;
 }
 
 .close-btn {
@@ -375,11 +435,14 @@
   background: #ef4444;
 }
 
-/* ANIMAZIONI */
+/* =========================================
+   ANIMAZIONI
+   ========================================= */
+
 @keyframes slideFromRight {
   from {
     opacity: 0;
-    transform: translateX(90px);
+    transform: translateX(40px);
   }
 
   to {
@@ -400,10 +463,13 @@
   }
 }
 
-/* RESPONSIVE TABLET */
+/* =========================================
+   RESPONSIVE TABLET
+   ========================================= */
+
 @media (max-width: 1050px) {
   .detail-container {
-    grid-template-columns: 280px 1fr;
+    grid-template-columns: 280px minmax(0, 1fr);
   }
 
   .detail-side {
@@ -412,27 +478,36 @@
   }
 }
 
-/* RESPONSIVE MOBILE */
+/* =========================================
+   RESPONSIVE MOBILE
+   ========================================= */
+
 @media (max-width: 700px) {
   .detail-page {
     padding: 1.2rem;
   }
 
   .detail-container {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
   }
 
   .detail-left {
+    width: 100%;
     max-width: 320px;
-    margin: auto;
+    margin: 0 auto;
+  }
+
+  .detail-info {
+    padding: 1.2rem;
   }
 
   .detail-info h1 {
     font-size: 2rem;
   }
 
-  .side-image-slide img {
-    height: 180px;
+  .side-image-slide {
+    aspect-ratio: 16 / 9;
   }
 
   .cast-grid {
@@ -444,9 +519,37 @@
     width: 100%;
     margin-left: 0;
     text-align: center;
+    box-sizing: border-box;
   }
 
-  .back-button {
-    box-sizing: border-box;
+  .detail-side {
+    position: static;
+  }
+
+  .trailer-modal {
+    align-items: center;
+    padding: 1rem;
+  }
+
+  .trailer-content {
+    width: 100%;
+  }
+}
+
+/* SCHERMI MOLTO PICCOLI */
+
+@media (max-width: 380px) {
+  .detail-page {
+    padding: 0.8rem;
+  }
+
+  .cast-card {
+    gap: 0.6rem;
+    padding: 0.6rem;
+  }
+
+  .cast-image-wrapper {
+    width: 60px;
+    height: 80px;
   }
 }
