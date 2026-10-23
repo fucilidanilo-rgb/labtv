@@ -1,4 +1,5 @@
-# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+
+# LABTV - Angular Frontend
 
 # Compiled output
 /dist/
@@ -8,7 +9,7 @@
 /coverage/
 /e2e/test-output/
 
-# Angular cache and artefacts
+# Angular cache
 /.angular/
 /.angular-cli.json
 /.ng/
@@ -40,33 +41,28 @@ yarn-error.log*
 # TypeScript cache
 *.tsbuildinfo
 
-# Miscellaneous
+# Temporary files
 .sass-cache/
 /connect.lock
 /libpeerconnection.log
 testem.log
 /typings
 __screenshots__/
+*.log
+*.tmp
 
 # System files
 .DS_Store
 Thumbs.db
 
 # Environment files
-/.env
-src/environments/environment.ts
-
-
-# Configurazioni locali
 .env
 .env.*
 !.env.example
-src/environments/environment.*.local.ts
+/src/environments/environment.ts
+/src/environments/environment.production.ts
+/src/environments/environment.*.local.ts
 
-# Cartelle esercizi esterne a LABTV
+# Exercise folders unrelated to LABTV
 /EXAME LABFORWEB/
 /SECONDA PROVA PRATICA/
-
-# File temporanei
-*.log
-*.tmp

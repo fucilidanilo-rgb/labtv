@@ -1,13 +1,15 @@
+
 {
   "name": "labtv",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "prebuild": "node scripts/generate-environment.mjs",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-   "json-server": "json-server --watch db.json --port 3000"
+    "json-server": "json-server --watch db.json --port 3000"
   },
   "prettier": {
     "printWidth": 100,
