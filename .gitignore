@@ -55,3 +55,18 @@ Thumbs.db
 # Environment files
 /.env
 src/environments/environment.ts
+
+
+# Configurazioni locali
+.env
+.env.*
+!.env.example
+src/environments/environment.*.local.ts
+
+# Cartelle esercizi esterne a LABTV
+/EXAME LABFORWEB/
+/SECONDA PROVA PRATICA/
+
+# File temporanei
+*.log
+*.tmp

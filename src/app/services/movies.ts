@@ -1,34 +1,60 @@
+
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
+
 import { environment } from '../../environments/environment';
 import { Movie } from '../models/movie';
-import { AuthService } from './auth';
+
+// Dati di un acquisto restituiti da Spring Boot
+export interface Acquisto {
+  id: number;
+  movieId: number;
+  title: string;
+  poster: string | null;
+  purchaseDate: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class MoviesService {
-  private http = inject(HttpClient);
-  private authService = inject(AuthService);
+
+  private readonly http = inject(HttpClient);
+
+  private readonly acquistiUrl =
+    `${environment.springBootUrl}/acquisti`;
+
+  // =====================================
+  // TMDB - CATALOGO FILM
+  // =====================================
 
   getMovies(): Observable<Movie[]> {
     return this.http
-      .get<any>(
-        `${environment.tmdbBaseUrl}/discover/movie?api_key=${environment.tmdbApiKey}`
+      .get<{ results: Movie[] }>(
+        `${environment.tmdbBaseUrl}/discover/movie` +
+        `?api_key=${environment.tmdbApiKey}`
       )
-      .pipe(map((res) => res.results));
+      .pipe(map((response) => response.results));
   }
+
+  // =====================================
+  // TMDB - RICERCA FILM
+  // =====================================
 
   searchMovies(query: string): Observable<Movie[]> {
     return this.http
-      .get<any>(
+      .get<{ results: Movie[] }>(
         `${environment.tmdbBaseUrl}/search/movie` +
         `?api_key=${environment.tmdbApiKey}` +
         `&query=${encodeURIComponent(query)}`
       )
-      .pipe(map((res) => res.results));
+      .pipe(map((response) => response.results));
   }
+
+  // =====================================
+  // TMDB - DETTAGLI FILM
+  // =====================================
 
   getMovieDetails(id: number): Observable<any> {
     return this.http.get<any>(
@@ -38,6 +64,10 @@ export class MoviesService {
     );
   }
 
+  // =====================================
+  // TMDB - TRAILER E VIDEO
+  // =====================================
+
   getMovieVideos(id: number): Observable<any> {
     return this.http.get<any>(
       `${environment.tmdbBaseUrl}/movie/${id}/videos` +
@@ -45,6 +75,10 @@ export class MoviesService {
       `&language=it-IT`
     );
   }
+
+  // =====================================
+  // TMDB - CAST
+  // =====================================
 
   getMovieCredits(id: number): Observable<any> {
     return this.http.get<any>(
@@ -54,40 +88,42 @@ export class MoviesService {
     );
   }
 
-  getPurchasedMovies(): Observable<any[]> {
-    const user = this.authService.getUser();
+  // =====================================
+  // SPRING BOOT - FILM ACQUISTATI
+  // =====================================
 
-    if (!user || !user.id) {
-      return this.http.get<any[]>(
-        `${environment.localUrl}/films-acquistati?userId=0`
-      );
-    }
-
-    return this.http.get<any[]>(
-      `${environment.localUrl}/films-acquistati?userId=${user.id}`
+  getPurchasedMovies(): Observable<Acquisto[]> {
+    return this.http.get<Acquisto[]>(
+      this.acquistiUrl
     );
   }
 
-  buyMovie(movie: any): Observable<any> {
-    const user = this.authService.getUser();
+  // =====================================
+  // SPRING BOOT - ACQUISTA FILM
+  // =====================================
+
+  buyMovie(movie: Movie): Observable<Acquisto> {
 
     const purchase = {
-      userId: user.id,
       movieId: movie.id,
       title: movie.title,
-      poster: movie.poster_path,
-      purchaseDate: new Date().toISOString()
+      poster: movie.poster_path
     };
 
-    return this.http.post(
-      `${environment.localUrl}/films-acquistati`,
+    return this.http.post<Acquisto>(
+      this.acquistiUrl,
       purchase
     );
   }
 
-  returnMovie(purchaseId: number): Observable<any> {
-    return this.http.delete(
-      `${environment.localUrl}/films-acquistati/${purchaseId}`
+  // =====================================
+  // SPRING BOOT - RESTITUISCI FILM
+  // =====================================
+
+  returnMovie(purchaseId: number): Observable<void> {
+    return this.http.delete<void>(
+      `${this.acquistiUrl}/${purchaseId}`
     );
   }
+
 }

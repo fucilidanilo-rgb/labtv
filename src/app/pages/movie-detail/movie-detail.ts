@@ -22,7 +22,9 @@ export class MovieDetail implements OnInit {
   loading = signal(false);
 
   // URL immagini TMDB
-  imageBaseUrl = environment.imageBaseUrl;
+ 
+imageBaseUrl = environment.imagesBaseUrl;
+
 
   // Trailer
   trailerKey = '';
