@@ -2,6 +2,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 interface LoginResponse {
   id: number;
@@ -23,7 +24,8 @@ export class AuthService {
 
   private http = inject(HttpClient);
 
-  private apiUrl = 'http://localhost:8080/api/auth';
+  // Backend Spring Boot: locale o Render in produzione
+  private apiUrl = `${environment.springBootUrl}/auth`;
 
   register(data: {
     email: string;
@@ -42,7 +44,6 @@ export class AuthService {
   }
 
   login(data: { email: string; password: string }) {
-
     return this.http.post<LoginResponse>(
       `${this.apiUrl}/login`,
       data
@@ -56,9 +57,15 @@ export class AuthService {
           email: response.email
         };
 
-        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem(
+          'user',
+          JSON.stringify(user)
+        );
 
-        localStorage.setItem('token', response.token);
+        localStorage.setItem(
+          'token',
+          response.token
+        );
       })
     );
   }
@@ -77,7 +84,7 @@ export class AuthService {
     return user ? JSON.parse(user) : null;
   }
 
-  logout() {
+  logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
   }
