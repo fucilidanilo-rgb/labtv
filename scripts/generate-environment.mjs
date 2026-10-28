@@ -1,5 +1,5 @@
 
-import { mkdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, writeFileSync, existsSync } from "node:fs";
 
 const tmdbApiKey = process.env.TMDB_API_KEY;
 const springBootUrl =
@@ -10,7 +10,9 @@ if (!tmdbApiKey) {
   throw new Error("Manca la variabile TMDB_API_KEY");
 }
 
-const content = `export const environment = {
+mkdirSync("src/environments", { recursive: true });
+
+const productionContent = `export const environment = {
   production: true,
   tmdbApiKey: ${JSON.stringify(tmdbApiKey)},
   tmdbBaseUrl: 'https://api.themoviedb.org/3',
@@ -19,11 +21,24 @@ const content = `export const environment = {
 };
 `;
 
-mkdirSync("src/environments", { recursive: true });
-
 writeFileSync(
   "src/environments/environment.production.ts",
-  content
+  productionContent
 );
 
-console.log("Configurazione Angular production generata.");
+// Crea environment.ts solo se non esiste già
+if (!existsSync("src/environments/environment.ts")) {
+  writeFileSync(
+    "src/environments/environment.ts",
+    `export const environment = {
+  production: false,
+  tmdbApiKey: '',
+  tmdbBaseUrl: 'https://api.themoviedb.org/3',
+  imagesBaseUrl: 'https://image.tmdb.org/t/p/w500',
+  springBootUrl: 'http://localhost:8080/api'
+};
+`
+  );
+}
+
+console.log("Configurazione Angular generata correttamente.");
