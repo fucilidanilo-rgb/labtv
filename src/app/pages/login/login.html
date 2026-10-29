@@ -1,22 +1,102 @@
+
 <div class="login-wrapper">
   <div class="login-card">
+
     <h2>Bentornato! 👋</h2>
     <p>Accedi per gestire i tuoi acquisti</p>
-    
+
     <form (ngSubmit)="onSubmit()">
+
+      <!-- EMAIL -->
       <div class="form-group">
-        <label>Email</label>
-        <input type="email" name="email" [(ngModel)]="loginData.email" placeholder="latua@email.com" required>
+        <label for="email">Email</label>
+
+        <input
+          id="email"
+          type="email"
+          name="email"
+          [(ngModel)]="loginData.email"
+          placeholder="latua@email.com"
+          autocomplete="username"
+          required
+        />
       </div>
 
+      <!-- PASSWORD -->
       <div class="form-group">
-        <label>Password</label>
-        <input type="password" name="password" [(ngModel)]="loginData.password" placeholder="••••••••" required>
+        <label for="password">Password</label>
+
+        <input
+          id="password"
+          type="password"
+          name="password"
+          [(ngModel)]="loginData.password"
+          placeholder="••••••••"
+          autocomplete="current-password"
+          required
+        />
       </div>
 
-      <button type="submit" class="btn-login">Accedi</button>
+      <!-- PULSANTE LOGIN -->
+      <button
+        type="submit"
+        class="btn-login"
+        [disabled]="loading">
+
+        @if (loading) {
+          Accesso in corso...
+        } @else {
+          Accedi
+        }
+
+      </button>
+
+      <!-- AVVISO RENDER FREE -->
+      @if (loading) {
+        <p class="login-loading-message" role="status">
+          Connessione al server in corso.
+          Il primo accesso potrebbe richiedere più tempo
+          perché il backend utilizza Render Free.
+        </p>
+      }
+
     </form>
-    
-   
   </div>
 </div>
+
+<!-- NOTIFICHE TOAST -->
+@if (toastVisible) {
+  <div
+    class="toast-notification"
+    [class.toast-success]="toastType === 'success'"
+    [class.toast-error]="toastType === 'error'"
+    [class.toast-info]="toastType === 'info'"
+    role="status"
+    aria-live="polite">
+
+    <div class="toast-content">
+      <span class="toast-icon">
+        {{
+          toastType === 'success'
+            ? '✓'
+            : toastType === 'error'
+              ? '✕'
+              : 'ℹ'
+        }}
+      </span>
+
+      <span class="toast-message">
+        {{ toastMessage }}
+      </span>
+    </div>
+
+    <button
+      type="button"
+      class="toast-close"
+      (click)="closeToast()"
+      aria-label="Chiudi notifica">
+      ✕
+    </button>
+
+  </div>
+}

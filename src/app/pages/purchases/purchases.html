@@ -1,27 +1,45 @@
+
 <div class="purchases-page">
+
+  <!-- MASCOTTE LABTV -->
   <div class="labtv-mascot">
     <div class="mascot-face">
       <span class="eye left"></span>
       <span class="eye right"></span>
       <span class="mouth"></span>
     </div>
-    <div class="speech-bubble">Benvenuto su LABTV 🎬</div>
+
+    <div class="speech-bubble">
+      Benvenuto su LABTV 🎬
+    </div>
   </div>
 
+  <!-- INTESTAZIONE -->
   <div class="purchases-header">
     <h1>I miei acquisti</h1>
-    <p>I tuoi film acquistati, sempre pronti da guardare.</p>
+    <p>
+      I tuoi film acquistati, sempre pronti da guardare.
+    </p>
   </div>
 
+  <!-- CARICAMENTO -->
   @if (loading) {
     <div class="loading-box">
       <div class="spinner"></div>
       <p>Sto caricando i tuoi film...</p>
     </div>
-  } @else if (purchases.length > 0) {
+  }
+
+  <!-- FILM ACQUISTATI -->
+  @else if (purchases.length > 0) {
+
     <div class="purchases-grid">
+
       @for (purchase of purchases; track purchase.id) {
+
         <div class="purchase-card">
+
+          <!-- LOCANDINA -->
           @if (purchase.poster) {
             <div class="purchase-image-wrapper">
               <img
@@ -32,24 +50,90 @@
             </div>
           }
 
+          <!-- INFORMAZIONI FILM -->
           <div class="purchase-content">
+
             <h3>{{ purchase.title }}</h3>
+
             <p class="purchase-date">
-              Acquistato il {{ purchase.purchaseDate | date:'short' }}
+              Acquistato il
+              {{ purchase.purchaseDate | date:'short' }}
             </p>
 
-            <button class="return-button" (click)="restituisci(purchase.id)">
-              ↩ Restituisci Film
+            <!-- RESTITUZIONE -->
+            <button
+              type="button"
+              class="return-button"
+              [disabled]="returningId !== null"
+              (click)="restituisci(purchase.id)">
+
+              @if (returningId === purchase.id) {
+                Restituzione in corso...
+              } @else {
+                ↩ Restituisci Film
+              }
+
             </button>
+
           </div>
         </div>
+
       }
-    </div>
-  } @else {
-    <div class="empty-state">
-      <div class="empty-icon">🎞️</div>
-      <h3>Nessun film acquistato</h3>
-      <p>Quando acquisterai un film, comparirà qui dentro.</p>
+
     </div>
   }
+
+  <!-- LIBRERIA VUOTA -->
+  @else {
+    <div class="empty-state">
+      <div class="empty-icon">🎞️</div>
+
+      <h3>Nessun film acquistato</h3>
+
+      <p>
+        Quando acquisterai un film,
+        comparirà qui dentro.
+      </p>
+    </div>
+  }
+
 </div>
+
+<!-- NOTIFICHE TOAST LABTV -->
+@if (toastVisible) {
+
+  <div
+    class="toast-notification"
+    [ngClass]="'toast-' + toastType"
+    role="status"
+    aria-live="polite">
+
+    <div class="toast-content">
+
+      <span class="toast-icon">
+        {{
+          toastType === 'success'
+            ? '✓'
+            : toastType === 'error'
+              ? '✕'
+              : 'ℹ'
+        }}
+      </span>
+
+      <span class="toast-message">
+        {{ toastMessage }}
+      </span>
+
+    </div>
+
+    <button
+      type="button"
+      class="toast-close"
+      (click)="closeToast()"
+      aria-label="Chiudi notifica">
+      ✕
+    </button>
+
+  </div>
+
+}

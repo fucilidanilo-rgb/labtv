@@ -1,16 +1,34 @@
+
+/* ===================================== */
+/* PAGINA ACQUISTI LABTV                 */
+/* ===================================== */
+
 .purchases-page {
   min-height: 100vh;
   padding: 2rem;
+
   background:
-    radial-gradient(circle at top left, rgba(56, 189, 248, 0.12), transparent 30%),
-    radial-gradient(circle at top right, rgba(168, 85, 247, 0.12), transparent 30%),
+    radial-gradient(
+      circle at top left,
+      rgba(56, 189, 248, 0.12),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at top right,
+      rgba(168, 85, 247, 0.12),
+      transparent 30%
+    ),
     linear-gradient(135deg, #020617, #0f172a, #111827);
+
   color: white;
   position: relative;
   overflow-x: hidden;
 }
 
-/* Mascotte LABTV */
+/* ===================================== */
+/* MASCOTTE LABTV                        */
+/* ===================================== */
+
 .labtv-mascot {
   position: relative;
   width: fit-content;
@@ -69,6 +87,10 @@
   animation: bubbleFloat 2.5s ease-in-out infinite;
 }
 
+/* ===================================== */
+/* INTESTAZIONE                          */
+/* ===================================== */
+
 .purchases-header {
   text-align: center;
   margin-bottom: 2rem;
@@ -86,6 +108,10 @@
   color: #cbd5e1;
   font-size: 1rem;
 }
+
+/* ===================================== */
+/* CARICAMENTO E LIBRERIA VUOTA          */
+/* ===================================== */
 
 .loading-box,
 .empty-state {
@@ -109,11 +135,19 @@
   animation: spin 0.9s linear infinite;
 }
 
+/* ===================================== */
+/* GRIGLIA FILM                          */
+/* ===================================== */
+
 .purchases-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
   gap: 1.5rem;
 }
+
+/* ===================================== */
+/* CARD FILM                             */
+/* ===================================== */
 
 .purchase-card {
   background: rgba(15, 23, 42, 0.95);
@@ -121,7 +155,9 @@
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
   animation: fadeUp 0.5s ease;
 }
 
@@ -129,6 +165,8 @@
   transform: translateY(-6px) scale(1.01);
   box-shadow: 0 20px 40px rgba(14, 165, 233, 0.12);
 }
+
+/* LOCANDINA */
 
 .purchase-image-wrapper {
   width: 100%;
@@ -149,6 +187,8 @@
   transform: scale(1.04);
 }
 
+/* INFORMAZIONI */
+
 .purchase-content {
   padding: 1rem;
 }
@@ -166,6 +206,10 @@
   margin-bottom: 1rem;
 }
 
+/* ===================================== */
+/* PULSANTE RESTITUZIONE                 */
+/* ===================================== */
+
 .return-button {
   width: 100%;
   padding: 0.9rem 1rem;
@@ -175,19 +219,32 @@
   color: white;
   font-weight: 700;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
-.return-button:hover {
+.return-button:hover:not(:disabled) {
   transform: translateY(-2px);
   box-shadow: 0 12px 24px rgba(234, 88, 12, 0.3);
 }
+
+.return-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ===================================== */
+/* ANIMAZIONI PAGINA                     */
+/* ===================================== */
 
 @keyframes mascotEntrance {
   0% {
     opacity: 0;
     transform: translateY(-25px) scale(0.8);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -198,6 +255,7 @@
   0%, 100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-4px);
   }
@@ -208,6 +266,7 @@
     opacity: 0;
     transform: translateY(14px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -220,6 +279,123 @@
   }
 }
 
+/* ===================================== */
+/* NOTIFICHE TOAST LABTV                 */
+/* ===================================== */
+
+.toast-notification {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+
+  width: max-content;
+  max-width: min(420px, calc(100vw - 32px));
+  padding: 16px 20px;
+
+  background: #111827;
+  color: #ffffff;
+
+  border: 1px solid #334155;
+  border-left: 4px solid #00a8ff;
+  border-radius: 12px;
+
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.55);
+
+  animation: toastSlideIn 0.35s ease-out;
+}
+
+.toast-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.toast-icon {
+  font-size: 22px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.toast-message {
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+/* SUCCESSO */
+
+.toast-success {
+  border-left-color: #22c55e;
+}
+
+.toast-success .toast-icon {
+  color: #22c55e;
+}
+
+/* ERRORE */
+
+.toast-error {
+  border-left-color: #ef4444;
+}
+
+.toast-error .toast-icon {
+  color: #ef4444;
+}
+
+/* INFORMAZIONE */
+
+.toast-info {
+  border-left-color: #00a8ff;
+}
+
+.toast-info .toast-icon {
+  color: #00a8ff;
+}
+
+/* PULSANTE CHIUSURA */
+
+.toast-close {
+  border: none;
+  background: transparent;
+  color: #94a3b8;
+
+  font-size: 18px;
+  cursor: pointer;
+
+  padding: 4px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.toast-close:hover {
+  color: #ffffff;
+}
+
+/* ANIMAZIONE TOAST */
+
+@keyframes toastSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(35px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ===================================== */
+/* RESPONSIVE                           */
+/* ===================================== */
+
 @media (max-width: 600px) {
   .purchases-page {
     padding: 1.2rem;
@@ -231,5 +407,22 @@
 
   .purchase-image-wrapper {
     height: 280px;
+  }
+
+  .toast-notification {
+    bottom: 16px;
+    right: 16px;
+    left: 16px;
+
+    width: auto;
+    max-width: none;
+  }
+}
+
+/* ACCESSIBILITÀ */
+
+@media (prefers-reduced-motion: reduce) {
+  .toast-notification {
+    animation: none;
   }
 }

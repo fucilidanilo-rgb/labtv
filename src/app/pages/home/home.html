@@ -1,3 +1,4 @@
+
 <div class="home-container">
   <section class="hero">
     <div class="hero-content">
@@ -15,7 +16,10 @@
       class="search-input"
     />
 
-    <button type="button" class="search-button" (click)="onSearch()">
+    <button
+      type="button"
+      class="search-button"
+      (click)="onSearch()">
       Cerca
     </button>
   </section>
@@ -26,6 +30,7 @@
 
   <section class="movies-grid">
     <div class="movie-card" *ngFor="let movie of movies">
+
       <a [routerLink]="['/movie', movie.id]" class="movie-link">
         <div class="movie-image-wrapper">
           <img
@@ -39,40 +44,74 @@
         <div class="movie-overlay">
           <div class="movie-info">
             <h3>{{ movie.title }}</h3>
-            <p>{{ movie.release_date ? (movie.release_date | date:'yyyy') : 'N/D' }}</p>
+            <p>
+              {{ movie.release_date
+                ? (movie.release_date | date:'yyyy')
+                : 'N/D' }}
+            </p>
             <span class="detail-button">Dettaglio</span>
           </div>
         </div>
       </a>
 
       <div class="movie-actions">
-        <ng-container *ngIf="authService.isLoggedIn(); else loginMessage">
+        <ng-container
+          *ngIf="authService.isLoggedIn(); else loginMessage">
+
           <button
             *ngIf="!isPurchased(movie.id); else returnButton"
             class="buy-button"
-            (click)="compralo(movie)"
-          >
+            (click)="compralo(movie)">
             🛒 Acquista
           </button>
 
           <ng-template #returnButton>
             <button
               class="return-button"
-              (click)="restituisciDaHome(movie.id)"
-            >
+              (click)="restituisciDaHome(movie.id)">
               ↩️ Restituisci Film
             </button>
           </ng-template>
+
         </ng-container>
 
         <ng-template #loginMessage>
-
-          <p class="login-warning">Accedi per acquistare questo film</p>
-
-          
-
+          <p class="login-warning">
+            Accedi per acquistare questo film
+          </p>
         </ng-template>
       </div>
     </div>
   </section>
+</div>
+
+<!-- NOTIFICHE TOAST -->
+<div
+  *ngIf="toastVisible"
+  class="toast-notification"
+  [ngClass]="'toast-' + toastType"
+  role="status"
+  aria-live="polite">
+
+  <div class="toast-content">
+    <span class="toast-icon">
+      {{ toastType === 'success'
+        ? '✓'
+        : toastType === 'error'
+          ? '✕'
+          : 'ℹ' }}
+    </span>
+
+    <span class="toast-message">
+      {{ toastMessage }}
+    </span>
+  </div>
+
+  <button
+    type="button"
+    class="toast-close"
+    (click)="closeToast()"
+    aria-label="Chiudi notifica">
+    ✕
+  </button>
 </div>

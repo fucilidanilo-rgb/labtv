@@ -1,0 +1,346 @@
+
+<div class="project-page">
+
+  <!-- PRESENTAZIONE PROGETTO -->
+  <section class="project-hero">
+
+    <span class="project-badge">
+      PROGETTO PORTFOLIO FULL STACK
+    </span>
+
+    <h1>LABTV — Il mio progetto Full Stack 🎬</h1>
+
+    <p class="project-subtitle">
+      Una piattaforma dedicata al cinema,
+      sviluppata con Angular, Spring Boot e MySQL.
+    </p>
+
+    <p class="project-description">
+      LABTV è un'applicazione web Full Stack
+      sviluppata come progetto portfolio per mettere
+      in pratica le mie competenze nella programmazione
+      frontend e backend.
+
+      L'applicazione consente di esplorare un catalogo
+      di film, effettuare ricerche, visualizzare
+      informazioni dettagliate e gestire una libreria
+      personale attraverso acquisti e restituzioni
+      simulate.
+
+      Il progetto integra autenticazione JWT,
+      API REST, persistenza dei dati e distribuzione
+      su servizi cloud.
+    </p>
+
+    <div class="project-actions">
+
+      <a
+        href="https://github.com/fucilidanilo-rgb/labtv"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="project-button primary">
+        Codice Frontend ↗
+      </a>
+
+      <a
+        href="https://github.com/fucilidanilo-rgb/labtv-backend"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="project-button secondary">
+        Codice Backend ↗
+      </a>
+
+    </div>
+
+  </section>
+
+  <!-- ARCHITETTURA -->
+  <section class="project-section">
+
+    <h2>Architettura del sistema</h2>
+
+    <p class="section-description">
+      LABTV utilizza un'architettura a livelli
+      che separa l'interfaccia utente, la logica
+      applicativa e la gestione dei dati.
+    </p>
+
+    <div class="architecture">
+
+      <div class="architecture-card">
+        <span class="architecture-icon">🖥️</span>
+        <h3>Angular 21</h3>
+        <p>Interfaccia frontend</p>
+        <span>Vercel</span>
+      </div>
+
+      <div class="architecture-arrow">→</div>
+
+      <div class="architecture-card">
+        <span class="architecture-icon">⚙️</span>
+        <h3>Spring Boot</h3>
+        <p>API REST e sicurezza</p>
+        <span>Render</span>
+      </div>
+
+      <div class="architecture-arrow">→</div>
+
+      <div class="architecture-card">
+        <span class="architecture-icon">🗄️</span>
+        <h3>MySQL</h3>
+        <p>Persistenza dei dati</p>
+        <span>Aiven</span>
+      </div>
+
+    </div>
+
+    <p class="architecture-note">
+      Il frontend Angular comunica con il backend
+      Spring Boot tramite richieste HTTP alle API REST.
+
+      Il backend gestisce autenticazione, acquisti e
+      restituzioni, utilizzando MySQL per la
+      persistenza dei dati.
+
+      Le informazioni sui film vengono recuperate
+      tramite l'API esterna TMDB.
+    </p>
+
+  </section>
+
+  <!-- TECNOLOGIE -->
+  <section class="project-section">
+
+    <h2>Tecnologie utilizzate</h2>
+
+    <div class="tech-grid">
+
+      <div class="tech-card">
+        <h3>Frontend</h3>
+
+        <div class="tech-tags">
+          <span>Angular 21</span>
+          <span>TypeScript</span>
+          <span>HTML5</span>
+          <span>CSS3</span>
+          <span>RxJS</span>
+        </div>
+      </div>
+
+      <div class="tech-card">
+        <h3>Backend</h3>
+
+        <div class="tech-tags">
+          <span>Java 21</span>
+          <span>Spring Boot 4.1.1</span>
+          <span>REST API</span>
+          <span>Spring Security</span>
+          <span>JWT</span>
+          <span>BCrypt</span>
+        </div>
+      </div>
+
+      <div class="tech-card">
+        <h3>Database e infrastruttura</h3>
+
+        <div class="tech-tags">
+          <span>MySQL</span>
+          <span>JPA / Hibernate</span>
+          <span>Docker</span>
+          <span>Aiven</span>
+          <span>Render</span>
+          <span>Vercel</span>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- FUNZIONALITA -->
+  <section class="project-section">
+
+    <h2>Funzionalità principali</h2>
+
+    <div class="features-grid">
+
+      <div class="feature-card">
+
+        <span class="feature-icon">🎞️</span>
+
+        <h3>Catalogo e ricerca film</h3>
+
+        <p>
+          Consultazione del catalogo cinematografico,
+          ricerca per titolo e visualizzazione
+          delle informazioni dettagliate dei film
+          attraverso l'integrazione con TMDB.
+        </p>
+
+      </div>
+
+      <div class="feature-card">
+
+        <span class="feature-icon">🔐</span>
+
+        <h3>Autenticazione sicura</h3>
+
+        <p>
+          Sistema di login basato su JWT,
+          gestione delle autorizzazioni con
+          Spring Security e protezione delle
+          password tramite hashing BCrypt.
+        </p>
+
+      </div>
+
+      <div class="feature-card">
+
+        <span class="feature-icon">🛒</span>
+
+        <h3>Acquisti simulati</h3>
+
+        <p>
+          Possibilità di aggiungere film alla
+          propria libreria tramite operazioni
+          gestite dal backend e registrate
+          nel database MySQL.
+
+          Non vengono effettuati pagamenti reali.
+        </p>
+
+      </div>
+
+      <div class="feature-card">
+
+        <span class="feature-icon">↩️</span>
+
+        <h3>Restituzione dei film</h3>
+
+        <p>
+          Gestione delle restituzioni dei film
+          precedentemente acquistati, con
+          aggiornamento della libreria e
+          sincronizzazione dei dati con il backend.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- SICUREZZA -->
+  <section class="project-section security-section">
+
+    <h2>Sicurezza e struttura backend</h2>
+
+    <p>
+      Il backend è sviluppato in Java con
+      Spring Boot e segue un'architettura
+      organizzata in Controller, Service
+      e Repository.
+
+      Questa separazione permette di mantenere
+      distinti gli endpoint REST, la logica
+      applicativa e l'accesso ai dati.
+    </p>
+
+    <p>
+      L'autenticazione viene gestita tramite
+      Spring Security e token JWT.
+
+      Le password degli utenti vengono protette
+      utilizzando BCrypt, mentre JPA e Hibernate
+      gestiscono la persistenza nel database MySQL.
+    </p>
+
+  </section>
+
+  <!-- DEMO PUBBLICA -->
+  <section class="project-section demo-section">
+
+    <h2>Informazioni sulla demo</h2>
+
+    <p>
+      LABTV è un progetto dimostrativo
+      realizzato a scopo didattico e di portfolio.
+
+      La registrazione pubblica è disabilitata
+      e per testare le funzionalità viene
+      utilizzato un account dimostrativo.
+    </p>
+
+    <p>
+      Gli acquisti e le restituzioni sono
+      simulati e non prevedono transazioni
+      economiche reali.
+
+      I dati della libreria dell'account demo
+      sono condivisi tra gli utenti che
+      utilizzano le stesse credenziali.
+    </p>
+
+    <div class="hosting-notice">
+
+      <h3>⏳ Nota sul servizio di hosting gratuito</h3>
+
+      <p>
+        Il backend di LABTV è ospitato su
+        Render Free, un servizio gratuito
+        che può sospendere temporaneamente
+        l'applicazione dopo un periodo
+        di inattività.
+
+        Per questo motivo, il primo accesso
+        o la prima richiesta API potrebbero
+        richiedere un minuto o più,
+        mentre il server viene riattivato.
+
+        Le richieste successive sono
+        generalmente più veloci.
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- GITHUB -->
+  <section class="project-footer">
+
+    <h2>Esplora il codice sorgente</h2>
+
+    <p>
+      Il codice del progetto è disponibile
+      su GitHub in due repository separati:
+      uno dedicato al frontend Angular
+      e uno al backend Spring Boot.
+
+      Puoi consultarli per approfondire
+      la struttura, le tecnologie e
+      le soluzioni implementate.
+    </p>
+
+    <div class="project-actions">
+
+      <a
+        href="https://github.com/fucilidanilo-rgb/labtv"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="project-button primary">
+        Repository Frontend ↗
+      </a>
+
+      <a
+        href="https://github.com/fucilidanilo-rgb/labtv-backend"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="project-button secondary">
+        Repository Backend ↗
+      </a>
+
+    </div>
+
+  </section>
+
+</div>

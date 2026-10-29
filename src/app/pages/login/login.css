@@ -1,62 +1,312 @@
-/* Centra tutto nella pagina */
+
+/* ===================================== */
+/* LOGIN LABTV - GRAFICA ORIGINALE       */
+/* ===================================== */
+
 .login-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; /* Usa tutta l'altezza dello schermo */
-  background-color: #0f172a; /* Blu notte profondo */
+  min-height: 100vh;
+  padding: 24px;
+  box-sizing: border-box;
+  background-color: #0f172a;
 }
 
+/* CARD LOGIN */
+
 .login-card {
-  background: #1e293b; 
-  padding: 3rem; /* Molto più spazio interno */
+  background: #1e293b;
+  padding: 3rem;
   border-radius: 16px;
+
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+
   width: 100%;
   max-width: 450px;
+  box-sizing: border-box;
+
   color: white;
 }
 
-h2 {
-  margin-bottom: 0.5rem;
+/* TITOLO */
+
+.login-card h2 {
+  margin: 0 0 0.5rem;
   font-size: 1.8rem;
+  color: #ffffff;
 }
 
-p {
+/* DESCRIZIONE */
+
+.login-card > p {
   color: #94a3b8;
-  margin-bottom: 2.5rem; /* Spazio sotto la descrizione */
+  margin: 0 0 2.5rem;
+  line-height: 1.5;
 }
+
+/* ===================================== */
+/* CAMPI DEL FORM                        */
+/* ===================================== */
 
 .form-group {
-  margin-bottom: 1.5rem; /* Spazio tra i campi */
+  margin-bottom: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem; /* Spazio tra label e input */
+  gap: 0.5rem;
   text-align: left;
 }
 
-input {
-  padding: 0.8rem 1rem;
-  border-radius: 8px;
-  border: 1px solid #334155;
-  background: #0f172a;
-  color: white;
-  font-size: 1rem;
+.form-group label {
+  color: #e2e8f0;
+  font-size: 0.95rem;
+  font-weight: 500;
 }
 
+.form-group input {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 0.8rem 1rem;
+
+  border-radius: 8px;
+  border: 1px solid #334155;
+
+  background: #0f172a;
+  color: white;
+
+  font-size: 1rem;
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.form-group input::placeholder {
+  color: #64748b;
+}
+
+.form-group input:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.12);
+}
+
+/* ===================================== */
+/* PULSANTE LOGIN                        */
+/* ===================================== */
+
 .btn-login {
+  display: block;
+  width: 100%;
+
   margin-top: 1rem;
   padding: 1rem;
-  background: #3b82f6; /* Blu brillante */
+
+  background: #3b82f6;
   border: none;
   border-radius: 8px;
+
   color: white;
+  font-size: 1rem;
   font-weight: 600;
+
   cursor: pointer;
-  width: 100%;
+
+  transition:
+    background 0.25s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
+
+.btn-login:hover:not(:disabled) {
+  background: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.25);
+}
+
+.btn-login:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* ===================================== */
+/* MESSAGGIO ATTESA RENDER FREE          */
+/* ===================================== */
+
+.login-loading-message {
+  margin: 18px 0 0;
+  padding: 12px 14px;
+
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 10px;
+
+  color: #cbd5e1;
+  font-size: 13px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* ===================================== */
+/* FOOTER                                */
+/* ===================================== */
 
 .footer {
   margin-top: 2rem;
   color: #94a3b8;
+}
+
+/* ===================================== */
+/* NOTIFICHE TOAST LABTV                 */
+/* ===================================== */
+
+.toast-notification {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+
+  width: max-content;
+  max-width: min(420px, calc(100vw - 32px));
+
+  padding: 16px 20px;
+  box-sizing: border-box;
+
+  background: #111827;
+  color: #ffffff;
+
+  border: 1px solid #334155;
+  border-left: 4px solid #00a8ff;
+  border-radius: 12px;
+
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.55);
+
+  animation: toastSlideIn 0.35s ease-out;
+}
+
+/* CONTENUTO NOTIFICA */
+
+.toast-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.toast-icon {
+  font-size: 22px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.toast-message {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #ffffff;
+  overflow-wrap: anywhere;
+}
+
+/* SUCCESSO - VERDE */
+
+.toast-success {
+  border-left-color: #22c55e;
+}
+
+.toast-success .toast-icon {
+  color: #22c55e;
+}
+
+/* ERRORE - ROSSO */
+
+.toast-error {
+  border-left-color: #ef4444;
+}
+
+.toast-error .toast-icon {
+  color: #ef4444;
+}
+
+/* INFORMAZIONE - AZZURRO */
+
+.toast-info {
+  border-left-color: #00a8ff;
+}
+
+.toast-info .toast-icon {
+  color: #00a8ff;
+}
+
+/* PULSANTE CHIUSURA */
+
+.toast-close {
+  border: none;
+  background: transparent;
+  color: #94a3b8;
+
+  font-size: 18px;
+  cursor: pointer;
+
+  padding: 4px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.toast-close:hover {
+  color: #ffffff;
+}
+
+/* ANIMAZIONE TOAST */
+
+@keyframes toastSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(35px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ===================================== */
+/* RESPONSIVE MOBILE                     */
+/* ===================================== */
+
+@media (max-width: 600px) {
+
+  .login-wrapper {
+    padding: 20px;
+  }
+
+  .login-card {
+    padding: 2rem;
+  }
+
+  .login-card h2 {
+    font-size: 1.6rem;
+  }
+
+  .toast-notification {
+    bottom: 16px;
+    right: 16px;
+    left: 16px;
+
+    width: auto;
+    max-width: none;
+  }
+}
+
+/* ACCESSIBILITÀ */
+
+@media (prefers-reduced-motion: reduce) {
+  .toast-notification {
+    animation: none;
+  }
 }
