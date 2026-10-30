@@ -1,3 +1,4 @@
+
 .home-container {
   padding: 30px;
   min-height: 100vh;
@@ -103,17 +104,18 @@
   position: relative;
 }
 
-/* IMMAGINE */
+/* IMMAGINE - LOCANDINA COMPLETA */
 .movie-image-wrapper {
   width: 100%;
-  height: 360px;
+  aspect-ratio: 2 / 3;
   background-color: #0f172a;
+  overflow: hidden;
 }
 
 .movie-image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
 }
 
@@ -221,7 +223,6 @@
   line-height: 1.3;
 }
 
-
 /* ===================================== */
 /* NOTIFICHE TOAST LABTV                 */
 /* ===================================== */
@@ -327,8 +328,45 @@
   }
 }
 
-/* VERSIONE MOBILE */
+/* ===================================== */
+/* VERSIONE MOBILE                       */
+/* ===================================== */
+
 @media (max-width: 600px) {
+  .home-container {
+    padding: 16px;
+  }
+
+  .hero {
+    padding: 30px 22px;
+  }
+
+  .hero-content h1 {
+    font-size: 30px;
+  }
+
+  .hero-content p {
+    font-size: 16px;
+  }
+
+  .search-input {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .movies-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .movie-card {
+    min-height: auto;
+  }
+
+  .movie-info h3 {
+    font-size: 16px;
+  }
+
   .toast-notification {
     bottom: 16px;
     right: 16px;

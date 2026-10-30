@@ -166,11 +166,13 @@
   box-shadow: 0 20px 40px rgba(14, 165, 233, 0.12);
 }
 
-/* LOCANDINA */
+/* ===================================== */
+/* LOCANDINA COMPLETA - FORMATO 2:3      */
+/* ===================================== */
 
 .purchase-image-wrapper {
   width: 100%;
-  height: 330px;
+  aspect-ratio: 2 / 3;
   overflow: hidden;
   background: #0b1220;
 }
@@ -178,16 +180,19 @@
 .purchase-image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
   transition: transform 0.35s ease;
 }
 
+/* Manteniamo l'effetto di ingrandimento */
 .purchase-card:hover .purchase-image {
   transform: scale(1.04);
 }
 
-/* INFORMAZIONI */
+/* ===================================== */
+/* INFORMAZIONI FILM                     */
+/* ===================================== */
 
 .purchase-content {
   padding: 1rem;
@@ -198,6 +203,8 @@
   font-size: 1.05rem;
   color: white;
   min-height: 48px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
 }
 
 .purchase-date {
@@ -393,7 +400,7 @@
 }
 
 /* ===================================== */
-/* RESPONSIVE                           */
+/* RESPONSIVE                            */
 /* ===================================== */
 
 @media (max-width: 600px) {
@@ -405,9 +412,18 @@
     font-size: 2rem;
   }
 
-  .purchase-image-wrapper {
-    height: 280px;
+  .purchases-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.25rem;
   }
+
+  .purchase-card {
+    width: 100%;
+    min-width: 0;
+  }
+
+  /* Niente altezza fissa:
+     la locandina conserva il formato 2:3 */
 
   .toast-notification {
     bottom: 16px;
