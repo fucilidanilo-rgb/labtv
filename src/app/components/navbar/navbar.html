@@ -1,15 +1,19 @@
 
 <nav class="navbar">
-  <div class="navbar-left">
+
+  <div class="navbar-main">
 
     <!-- LOGO -->
-    <a routerLink="/" class="brand">
+    <a
+      routerLink="/"
+      class="brand"
+      (click)="closeMenu()">
       LABTV
     </a>
 
+    <!-- MENU DESKTOP -->
     <div class="nav-links">
 
-      <!-- HOME -->
       <a
         routerLink="/"
         routerLinkActive="active"
@@ -17,7 +21,6 @@
         Home
       </a>
 
-      <!-- LOGIN -->
       <a
         *ngIf="!authService.isLoggedIn()"
         routerLink="/login"
@@ -25,7 +28,6 @@
         Login
       </a>
 
-      <!-- ACQUISTI -->
       <a
         *ngIf="authService.isLoggedIn()"
         routerLink="/purchases"
@@ -33,14 +35,12 @@
         Acquisti
       </a>
 
-      <!-- IL PROGETTO -->
       <a
         routerLink="/project"
         routerLinkActive="active">
         Il progetto
       </a>
 
-      <!-- CONTATTI -->
       <a
         routerLink="/contacts"
         routerLinkActive="active">
@@ -48,23 +48,120 @@
       </a>
 
     </div>
-  </div>
 
-  <!-- UTENTE AUTENTICATO -->
-  <div
-    class="navbar-right"
-    *ngIf="authService.isLoggedIn()">
+    <!-- UTENTE DESKTOP -->
+    <div
+      class="navbar-right"
+      *ngIf="authService.isLoggedIn()">
 
-    <span class="user-name">
-      👤 {{ authService.getUser()?.name }}
-    </span>
+      <span class="user-name">
+        👤 {{ authService.getUser()?.name }}
+      </span>
 
+      <button
+        type="button"
+        class="logout-btn"
+        (click)="logout()">
+        Logout
+      </button>
+
+    </div>
+
+    <!-- HAMBURGER MOBILE -->
     <button
       type="button"
-      class="logout-btn"
-      (click)="logout()">
-      Logout
+      class="menu-toggle"
+      [class.open]="menuOpen"
+      [attr.aria-expanded]="menuOpen"
+      aria-controls="mobile-navigation"
+      [attr.aria-label]="menuOpen ? 'Chiudi menu' : 'Apri menu'"
+      (click)="toggleMenu()">
+
+      <span></span>
+      <span></span>
+      <span></span>
+
     </button>
 
   </div>
+
+  <!-- MENU MOBILE CINEMATICO -->
+  <div
+    id="mobile-navigation"
+    class="mobile-menu"
+    [class.open]="menuOpen"
+    [attr.aria-hidden]="!menuOpen"
+    [attr.inert]="!menuOpen ? '' : null">
+
+    <div class="mobile-menu-inner">
+
+      <div class="mobile-menu-title">
+        EXPLORE LABTV
+      </div>
+
+      <a
+        routerLink="/"
+        routerLinkActive="mobile-active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        (click)="closeMenu()">
+        <span class="menu-icon">⌂</span>
+        Home
+      </a>
+
+      <a
+        *ngIf="!authService.isLoggedIn()"
+        routerLink="/login"
+        routerLinkActive="mobile-active"
+        (click)="closeMenu()">
+        <span class="menu-icon">↪</span>
+        Login
+      </a>
+
+      <a
+        *ngIf="authService.isLoggedIn()"
+        routerLink="/purchases"
+        routerLinkActive="mobile-active"
+        (click)="closeMenu()">
+        <span class="menu-icon">▣</span>
+        Acquisti
+      </a>
+
+      <a
+        routerLink="/project"
+        routerLinkActive="mobile-active"
+        (click)="closeMenu()">
+        <span class="menu-icon">✦</span>
+        Il progetto
+      </a>
+
+      <a
+        routerLink="/contacts"
+        routerLinkActive="mobile-active"
+        (click)="closeMenu()">
+        <span class="menu-icon">✉</span>
+        Contatti
+      </a>
+
+      <!-- ACCOUNT MOBILE -->
+      <div
+        class="mobile-account"
+        *ngIf="authService.isLoggedIn()">
+
+        <span class="mobile-user-name">
+          👤 {{ authService.getUser()?.name }}
+        </span>
+
+        <button
+          type="button"
+          class="logout-btn mobile-logout"
+          (click)="logout()">
+          Logout
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
 </nav>
